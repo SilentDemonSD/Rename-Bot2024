@@ -30,8 +30,7 @@ class Database:
         return bool(user)
 
     async def total_users_count(self):
-        count = await self.col.count_documents({})
-        return count
+        return await self.col.count_documents({})
 
     async def get_all_users(self):
         return self.col.find({})

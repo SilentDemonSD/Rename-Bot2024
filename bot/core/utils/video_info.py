@@ -12,11 +12,9 @@ def convert_sexagesimal_to_sec(text):
     else:
         nums = text.split(':')
     if len(nums) == 2:
-        st_sn = int(nums[0]) * 60 + float(nums[1])
-        return st_sn
+        return int(nums[0]) * 60 + float(nums[1])
     elif len(nums) == 3:
-        st_sn = int(nums[0]) * 3600 + int(nums[1]) * 60 + float(nums[2])
-        return st_sn
+        return int(nums[0]) * 3600 + int(nums[1]) * 60 + float(nums[2])
     else:
         return 0
 
@@ -62,7 +60,7 @@ async def get_audio_or_video_duration(path: str, provider: str = "ffprobe"):
             duration = 0
         else:
             try:
-                duration = int(int(stdout) / 1000)
+                duration = int(stdout) // 1000
             except: pass
     return duration
 

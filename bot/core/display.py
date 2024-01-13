@@ -51,21 +51,12 @@ async def progress_for_pyrogram(
         try:
             try:
                 _ = message.message_id
-                await message.edit(
-                    text="**{}**\n\n {}".format(
-                        ud_type,
-                        tmp
-                    ),
-                    parse_mode='markdown'
-                )
+                await message.edit(text=f"**{ud_type}**\n\n {tmp}", parse_mode='markdown')
             except AttributeError:
                 await bot.bot.edit_inline_caption(
                     inline_message_id=message.inline_message_id,
-                    caption="**{}**\n\n {}".format(
-                        ud_type,
-                        tmp
-                    ),
-                    parse_mode='markdown'
+                    caption=f"**{ud_type}**\n\n {tmp}",
+                    parse_mode='markdown',
                 )
         except FloodWait as e:
             await asyncio.sleep(e.x)
@@ -84,17 +75,19 @@ def humanbytes(size):
     while size > power:
         size /= power
         n += 1
-    return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
+    return f"{str(round(size, 2))} {Dic_powerN[n]}B"
 
 
 def TimeFormatter(milliseconds: int) -> str:
-    seconds, milliseconds = divmod(int(milliseconds), 1000)
+    seconds, milliseconds = divmod(milliseconds, 1000)
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
     days, hours = divmod(hours, 24)
-    tmp = ((str(days) + " days, ") if days else "") + \
-          ((str(hours) + " hours, ") if hours else "") + \
-          ((str(minutes) + " min, ") if minutes else "") + \
-          ((str(seconds) + " sec, ") if seconds else "") + \
-          ((str(milliseconds) + " millisec, ") if milliseconds else "")
+    tmp = (
+        (f"{str(days)} days, " if days else "")
+        + (f"{str(hours)} hours, " if hours else "")
+        + (f"{str(minutes)} min, " if minutes else "")
+        + (f"{str(seconds)} sec, " if seconds else "")
+        + (f"{str(milliseconds)} millisec, " if milliseconds else "")
+    )
     return tmp[:-2]

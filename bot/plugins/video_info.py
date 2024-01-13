@@ -65,7 +65,7 @@ async def video_info_handler(c: Client, m: Message):
         await m.reply_text("This is not a Video!", True)
         return
     editable = await m.reply_text("Downloading Video ...", quote=True)
-    dl_loc = Config.DOWNLOAD_DIR + "/" + str(m.from_user.id) + "/" + str(m.message_id) + "/"
+    dl_loc = f"{Config.DOWNLOAD_DIR}/{str(m.from_user.id)}/{str(m.message_id)}/"
     root_dl_loc = dl_loc
     if not os.path.isdir(dl_loc):
         os.makedirs(dl_loc)

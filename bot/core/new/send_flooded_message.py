@@ -53,7 +53,7 @@ class SendFloodedMessage:
         """
 
         try:
-            __SEND = await self.send_message(
+            return await self.send_message(
                 chat_id=chat_id,
                 text=text,
                 parse_mode=parse_mode,
@@ -62,9 +62,8 @@ class SendFloodedMessage:
                 disable_notification=disable_notification,
                 reply_to_message_id=reply_to_message_id,
                 schedule_date=schedule_date,
-                reply_markup=reply_markup
+                reply_markup=reply_markup,
             )
-            return __SEND
         except FloodWait as e:
             if e.x > 120:
                 return None

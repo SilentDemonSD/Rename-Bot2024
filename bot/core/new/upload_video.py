@@ -89,14 +89,8 @@ class UploadVideo:
                     output_directory=ss_dir,
                     ttl=random.randint(0, (duration or 1) - 1)
                 )
-                if metadata.has("width"):
-                    t_width = metadata.get("width")
-                else:
-                    t_width = width or 90
-                if metadata.has("height"):
-                    t_height = metadata.get("height")
-                else:
-                    t_height = height or 90
+                t_width = metadata.get("width") if metadata.has("width") else width or 90
+                t_height = metadata.get("height") if metadata.has("height") else height or 90
                 if os.path.exists(thumbnail):
                     Image.open(thumbnail).convert("RGB").save(thumbnail)
                     img = Image.open(thumbnail)
@@ -113,7 +107,7 @@ class UploadVideo:
             thumbnail = thumb
         if not caption:
             caption = f"**File Name:** `{os.path.basename(video)}`" \
-                      "\n\n**@AH_RenameBot**"
+                          "\n\n**@AH_RenameBot**"
         c_time = time.time()
         await self.send_video(
             chat_id=chat_id,

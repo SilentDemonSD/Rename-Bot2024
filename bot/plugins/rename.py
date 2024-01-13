@@ -54,7 +54,7 @@ async def rename_handler(c: Client, m: Message):
     _raw_file_name = get_media_file_name(m.reply_to_message)
     if not _raw_file_name:
         _file_ext = mimetypes.guess_extension(get_file_attr(m.reply_to_message).mime_type)
-        _raw_file_name = "UnknownFileName" + _file_ext
+        _raw_file_name = f"UnknownFileName{_file_ext}"
     if user_input_msg.text.rsplit(".", 1)[-1].lower() != _raw_file_name.rsplit(".", 1)[-1].lower():
         file_name = user_input_msg.text.rsplit(".", 1)[0][:255] + "." + _raw_file_name.rsplit(".", 1)[-1].lower()
     else:
